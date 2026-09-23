@@ -4,7 +4,7 @@ export const DashboardPage = () => {
   const { user } = useAuth();
 
   return (
-    <main className="min-h-screen bg-slate-50 p-5 sm:p-8">
+    <main className="p-5 sm:p-8">
       <div className="mx-auto max-w-7xl">
         <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
           Supreme Admin Dashboard

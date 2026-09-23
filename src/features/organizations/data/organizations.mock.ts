@@ -1,0 +1,40 @@
+import type { Organization } from "../types/organization.types";
+
+export const mockOrganizations: Organization[] = [
+  {
+    customId: "ORG-001",
+    name: "ABC Company",
+    email: "contact@abc.com",
+    phone: "+91 9876543210",
+    address: "Kochi, Kerala",
+    logoUrl: null,
+    status: "active",
+    isDeleted: false,
+    createdAt: "2026-09-01T10:00:00.000Z",
+    updatedAt: "2026-09-10T10:00:00.000Z",
+  },
+  {
+    customId: "ORG-002",
+    name: "XYZ Company",
+    email: "contact@xyz.com",
+    phone: "+91 9876543211",
+    address: "Bangalore, Karnataka",
+    logoUrl: null,
+    status: "blocked",
+    isDeleted: false,
+    createdAt: "2026-08-20T10:00:00.000Z",
+    updatedAt: "2026-09-12T10:00:00.000Z",
+  },
+  {
+    customId: "ORG-003",
+    name: "Tech Solutions",
+    email: "hello@techsolutions.com",
+    phone: "+91 9876543212",
+    address: "Thrissur, Kerala",
+    logoUrl: null,
+    status: "active",
+    isDeleted: false,
+    createdAt: "2026-08-15T10:00:00.000Z",
+    updatedAt: "2026-09-11T10:00:00.000Z",
+  },
+];
