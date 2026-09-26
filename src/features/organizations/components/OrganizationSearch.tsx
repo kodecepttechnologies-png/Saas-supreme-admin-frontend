@@ -24,8 +24,8 @@ export const OrganizationSearch = ({
           onChange(event.target.value)
         }
         placeholder="Search organizations..."
-        className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-[#5e94db] focus:ring-2 focus:ring-[#5e94db]/20"
+        className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none transition-all duration-150 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
       />
     </div>
   );
-};
+};

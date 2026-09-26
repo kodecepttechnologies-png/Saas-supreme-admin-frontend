@@ -15,15 +15,15 @@ export const OrganizationCard = ({
   const isBlocked = organization.status === "blocked";
 
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="rounded-2xl border border-gray-100 bg-white p-5 shadow-[0_10px_30px_rgba(99,102,241,0.08)]">
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <h3 className="truncate text-base font-semibold text-slate-900">
+          <h3 className="truncate text-base font-semibold text-gray-900">
             {organization.name}
           </h3>
 
-          <p className="mt-1 text-xs font-medium text-slate-500">
+          <p className="mt-1 text-xs font-medium text-gray-500">
             {organization.customId}
           </p>
         </div>
@@ -35,11 +35,11 @@ export const OrganizationCard = ({
       <div className="mt-5 space-y-3">
         {organization.email && (
           <div>
-            <p className="text-xs font-medium text-slate-500">
+            <p className="text-xs font-medium text-gray-400">
               Email
             </p>
 
-            <p className="mt-1 break-all text-sm text-slate-700">
+            <p className="mt-1 break-all text-sm text-gray-700">
               {organization.email}
             </p>
           </div>
@@ -47,11 +47,11 @@ export const OrganizationCard = ({
 
         {organization.phone && (
           <div>
-            <p className="text-xs font-medium text-slate-500">
+            <p className="text-xs font-medium text-gray-400">
               Phone
             </p>
 
-            <p className="mt-1 text-sm text-slate-700">
+            <p className="mt-1 text-sm text-gray-700">
               {organization.phone}
             </p>
           </div>
@@ -59,11 +59,11 @@ export const OrganizationCard = ({
 
         {organization.address && (
           <div>
-            <p className="text-xs font-medium text-slate-500">
+            <p className="text-xs font-medium text-gray-400">
               Address
             </p>
 
-            <p className="mt-1 text-sm text-slate-700">
+            <p className="mt-1 text-sm text-gray-700">
               {organization.address}
             </p>
           </div>
@@ -71,11 +71,11 @@ export const OrganizationCard = ({
       </div>
 
       {/* Actions */}
-      <div className="mt-5 flex gap-3 border-t border-slate-100 pt-4">
+      <div className="mt-5 flex gap-3 border-t border-gray-100 pt-4">
         <button
           type="button"
           onClick={() => onView?.(organization)}
-          className="flex-1 rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+          className="flex-1 rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50"
         >
           View
         </button>
@@ -83,11 +83,14 @@ export const OrganizationCard = ({
         <button
           type="button"
           onClick={() => onStatusAction?.(organization)}
-          className="flex-1 rounded-lg bg-[#5e94db] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
+          className={[
+            "flex-1 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90",
+            isBlocked ? "bg-emerald-600" : "bg-red-600",
+          ].join(" ")}
         >
           {isBlocked ? "Unblock" : "Block"}
         </button>
       </div>
     </article>
   );
-};
+};

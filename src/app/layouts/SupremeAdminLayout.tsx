@@ -8,6 +8,7 @@ import {
   PageContainer,
   Sidebar,
 } from "../../layouts";
+
 export const SupremeAdminLayout = () => {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] =
     useState(false);
@@ -19,7 +20,7 @@ export const SupremeAdminLayout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#F5F6FA]">
       <div className="flex min-h-screen">
         <Sidebar onLogout={handleLogout} />
 
@@ -35,12 +36,12 @@ export const SupremeAdminLayout = () => {
           />
 
           <PageContainer>
-
             <Outlet />
           </PageContainer>
+
           <Footer />
         </div>
       </div>
     </div>
   );
-};
+};

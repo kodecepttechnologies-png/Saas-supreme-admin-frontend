@@ -32,14 +32,14 @@ export const OrganizationDetailsPage = () => {
 
   if (!organization) {
     return (
-      <main className="p-5 sm:p-8">
+      <main className="p-4 sm:p-6 lg:p-8">
         <div className="mx-auto max-w-5xl">
-          <div className="rounded-xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-            <h1 className="text-xl font-semibold text-slate-900">
+          <div className="rounded-2xl border border-gray-100 bg-white p-8 text-center shadow-[0_10px_30px_rgba(99,102,241,0.08)]">
+            <h1 className="text-xl font-semibold text-gray-900">
               Organization Not Found
             </h1>
 
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-sm text-gray-500">
               The requested organization could not be
               found.
             </p>
@@ -49,7 +49,11 @@ export const OrganizationDetailsPage = () => {
               onClick={() =>
                 navigate("/organizations")
               }
-              className="mt-5 rounded-lg bg-[#5e94db] px-5 py-2.5 text-sm font-medium text-white hover:opacity-90"
+              className="mt-5 rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              style={{
+                background: "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
+                boxShadow: "0 4px 24px rgba(99,102,241,0.35)",
+              }}
             >
               Back to Organizations
             </button>
@@ -86,7 +90,7 @@ export const OrganizationDetailsPage = () => {
   };
 
   return (
-    <main className="p-5 sm:p-8">
+    <main className="p-4 sm:p-6 lg:p-8">
       <div className="mx-auto max-w-6xl">
         <div className="mb-6">
           <button
@@ -94,18 +98,18 @@ export const OrganizationDetailsPage = () => {
             onClick={() =>
               navigate("/organizations")
             }
-            className="mb-4 text-sm font-medium text-[#5e94db] hover:underline"
+            className="mb-4 text-sm font-medium text-indigo-600 transition-colors duration-150 hover:text-indigo-700 hover:underline"
           >
             ← Back to Organizations
           </button>
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
+              <h1 className="text-2xl font-bold text-gray-900">
                 {organization.name}
               </h1>
 
-              <p className="mt-1 text-sm text-slate-500">
+              <p className="mt-1 text-sm text-gray-500">
                 Organization details and read-only
                 employee information.
               </p>
@@ -119,7 +123,7 @@ export const OrganizationDetailsPage = () => {
                     `/organizations/${organization.customId}/edit`,
                   )
                 }
-                className="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+                className="rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50"
               >
                 Edit
               </button>
@@ -131,7 +135,10 @@ export const OrganizationDetailsPage = () => {
                     reset();
                     setIsStatusDialogOpen(true);
                   }}
-                  className="rounded-lg bg-[#5e94db] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
+                  className={[
+                    "rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90",
+                    organization.status === "blocked" ? "bg-emerald-600" : "bg-red-600",
+                  ].join(" ")}
                 >
                   {organization.status === "blocked"
                     ? "Unblock"
@@ -145,7 +152,7 @@ export const OrganizationDetailsPage = () => {
         {error && !isStatusDialogOpen && (
           <div
             role="alert"
-            className="mb-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+            className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
           >
             {error}
           </div>

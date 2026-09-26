@@ -121,25 +121,27 @@ export const OrganizationsPage = () => {
   };
 
   return (
-    <main className="p-5 sm:p-8">
+    <main className="p-4 sm:p-6 lg:p-8">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        {/* Page header */}
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
+            <h1 className="text-2xl font-bold text-gray-900">
               Organizations
             </h1>
-
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-1 text-sm text-gray-500">
               Manage organizations across the platform.
             </p>
           </div>
 
           <button
             type="button"
-            onClick={() =>
-              navigate("/organizations/new")
-            }
-            className="rounded-lg bg-[#5e94db] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#5e94db] focus:ring-offset-2"
+            onClick={() => navigate("/organizations/new")}
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            style={{
+              background: "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
+              boxShadow: "0 4px 24px rgba(99,102,241,0.35)",
+            }}
           >
             + Create Organization
           </button>
@@ -160,19 +162,19 @@ export const OrganizationsPage = () => {
         {error && (
           <div
             role="alert"
-            className="mb-5 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+            className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
           >
             {error}
           </div>
         )}
 
         {filteredOrganizations.length === 0 ? (
-          <div className="rounded-xl border border-slate-200 bg-white p-10 text-center shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900">
+          <div className="rounded-2xl border border-gray-100 bg-white p-10 text-center shadow-[0_10px_30px_rgba(99,102,241,0.08)]">
+            <h2 className="text-lg font-semibold text-gray-900">
               No organizations found
             </h2>
 
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-sm text-gray-500">
               Try changing your search or filter.
             </p>
           </div>

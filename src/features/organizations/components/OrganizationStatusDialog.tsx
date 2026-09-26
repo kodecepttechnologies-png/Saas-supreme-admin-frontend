@@ -35,7 +35,7 @@ export const OrganizationStatusDialog = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 backdrop-blur-[2px]"
       role="presentation"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget && !isLoading) {
@@ -48,7 +48,7 @@ export const OrganizationStatusDialog = ({
         aria-modal="true"
         aria-labelledby="organization-status-dialog-title"
         aria-describedby="organization-status-dialog-description"
-        className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl"
+        className="w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_20px_60px_rgba(0,0,0,0.18)]"
         onMouseDown={(event) => event.stopPropagation()}
       >
         <div className="mb-5">
@@ -76,7 +76,7 @@ export const OrganizationStatusDialog = ({
             type="button"
             onClick={onCancel}
             disabled={isLoading}
-            className="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Cancel
           </button>
@@ -85,7 +85,10 @@ export const OrganizationStatusDialog = ({
             type="button"
             onClick={onConfirm}
             disabled={isLoading}
-            className="rounded-lg bg-[#5e94db] px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+            className={[
+              "rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50",
+              isBlocking ? "bg-red-600" : "bg-emerald-600",
+            ].join(" ")}
           >
             {isLoading ? "Processing..." : confirmText}
           </button>
@@ -93,4 +96,4 @@ export const OrganizationStatusDialog = ({
       </div>
     </div>
   );
-};
+};
