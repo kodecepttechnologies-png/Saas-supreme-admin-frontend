@@ -1,18 +1,10 @@
 import { useState } from "react";
 
-import {
-  blockOrganization,
-  unblockOrganization,
-} from "../api/organizations.api";
+import { deleteOrganization } from "../api/organizations.api";
 
-type OrganizationStatusAction =
-  | "block"
-  | "unblock";
-
-interface UseOrganizationStatusReturn {
-  changeStatus: (
+interface UseDeleteOrganizationReturn {
+  remove: (
     organizationId: string,
-    action: OrganizationStatusAction,
   ) => Promise<boolean>;
 
   isLoading: boolean;
@@ -21,26 +13,21 @@ interface UseOrganizationStatusReturn {
   reset: () => void;
 }
 
-export const useOrganizationStatus =
-  (): UseOrganizationStatusReturn => {
+export const useDeleteOrganization =
+  (): UseDeleteOrganizationReturn => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
-    const changeStatus = async (
+    const remove = async (
       organizationId: string,
-      action: OrganizationStatusAction,
     ): Promise<boolean> => {
       setIsLoading(true);
       setError(null);
       setSuccess(false);
 
       try {
-        if (action === "block") {
-          await blockOrganization(organizationId);
-        } else {
-          await unblockOrganization(organizationId);
-        }
+        await deleteOrganization(organizationId);
 
         setSuccess(true);
 
@@ -49,7 +36,7 @@ export const useOrganizationStatus =
         const message =
           err instanceof Error
             ? err.message
-            : `Failed to ${action} organization.`;
+            : "Failed to delete organization.";
 
         setError(message);
 
@@ -65,7 +52,7 @@ export const useOrganizationStatus =
     };
 
     return {
-      changeStatus,
+      remove,
       isLoading,
       error,
       success,
