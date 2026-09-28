@@ -1,10 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import {
-  LoginPage,
-  RegisterPage,
-} from "../../features/auth";
-
+import { LoginPage } from "../../features/auth";
 import { DashboardPage } from "../../features/dashboard";
 
 import {
@@ -21,22 +17,22 @@ import { PublicRoute } from "./PublicRoute";
 export const AppRoutes = () => {
   return (
     <Routes>
-      {/* Public Routes */}
+      {/* Supreme Admin Login */}
       <Route element={<PublicRoute />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/supreme-admin/login"
+          element={<LoginPage />}
+        />
       </Route>
 
-      {/* Protected Routes */}
+      {/* Protected Supreme Admin */}
       <Route element={<ProtectedRoute />}>
         <Route element={<SupremeAdminLayout />}>
-          {/* Dashboard */}
           <Route
             path="/dashboard"
             element={<DashboardPage />}
           />
 
-          {/* Organizations */}
           <Route
             path="/organizations"
             element={<OrganizationsPage />}
@@ -59,10 +55,10 @@ export const AppRoutes = () => {
         </Route>
       </Route>
 
-      {/* Fallback */}
+      {/* Unknown URL */}
       <Route
         path="*"
-        element={<Navigate to="/dashboard" replace />}
+        element={<Navigate to="/supreme-admin/login" replace />}
       />
     </Routes>
   );

@@ -3,22 +3,12 @@ import { apiClient } from "../../../lib/api/client";
 import type {
   AuthResponse,
   LoginRequest,
-  RegisterRequest,
 } from "../types/auth.types";
 
 export const authApi = {
-  login: async (payload: LoginRequest): Promise<AuthResponse> => {
+ login: async (payload: LoginRequest): Promise<AuthResponse> => {
     const response = await apiClient.post<AuthResponse>(
-      "/auth/login",
-      payload,
-    );
-
-    return response.data;
-  },
-
-  register: async (payload: RegisterRequest): Promise<AuthResponse> => {
-    const response = await apiClient.post<AuthResponse>(
-      "/auth/register",
+      "/login",
       payload,
     );
 

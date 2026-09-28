@@ -6,16 +6,26 @@ import { loginSchema, type LoginFormData } from "../schemas/login.schema";
 import { useLogin } from "../hooks/useLogin";
 import { useAuth } from "../hooks/AuthContext";
 
+import { tokenStorage } from "../../../lib/auth/tokenStorage";
+import { getApiErrorMessage } from "../../../lib/api/apiError";
+
 const inputClass =
   "w-full rounded-lg border border-slate-200 bg-white py-2.5 pl-11 pr-4 text-[15px] text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-[#5e94db] focus:ring-4 focus:ring-[#5e94db]/15";
-const labelClass = "mb-1.5 block text-sm font-medium text-slate-700";
-const errorClass = "mt-1.5 text-sm text-red-600";
+
+const labelClass =
+  "mb-1.5 block text-sm font-medium text-slate-700";
+
+const errorClass =
+  "mt-1.5 text-sm text-red-600";
+
 const iconClass =
   "pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400";
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+
   const { setUser } = useAuth();
+
   const loginMutation = useLogin();
 
   const {
@@ -26,27 +36,49 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data: LoginFormData) => {
-    try {
-      const response = await loginMutation.mutateAsync(data);
+ const onSubmit = async (data: LoginFormData) => {
+  try {
+    const response = await loginMutation.mutateAsync(data);
 
-      setUser(response.user);
+    console.log("LOGIN SUCCESS:", response);
 
-      navigate("/dashboard");
-    } catch {
-      // We'll replace this with a reusable API error system.
-    }
-  };
+    // Save access token
+    tokenStorage.setToken(response.data.token);
 
+    // Save logged-in Supreme Admin
+    setUser(response.data.supremeAdmin);
+
+    // Go to dashboard
+    navigate("/dashboard");
+  } catch (error) {
+    console.error("LOGIN FAILED:", error);
+
+    const message = getApiErrorMessage(error);
+
+    console.error("LOGIN ERROR MESSAGE:", message);
+  }
+};
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-5"
+      noValidate
+    >
+      {/* Email */}
       <div>
         <label htmlFor="email" className={labelClass}>
           Email
         </label>
 
         <div className="relative">
-          <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+          <svg
+            className={iconClass}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            aria-hidden="true"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -59,7 +91,9 @@ export const LoginForm = () => {
             type="email"
             autoComplete="email"
             aria-invalid={!!errors.email}
-            aria-describedby={errors.email ? "email-error" : undefined}
+            aria-describedby={
+              errors.email ? "email-error" : undefined
+            }
             {...register("email")}
             className={inputClass}
             placeholder="admin@example.com"
@@ -73,13 +107,21 @@ export const LoginForm = () => {
         )}
       </div>
 
+      {/* Password */}
       <div>
         <label htmlFor="password" className={labelClass}>
           Password
         </label>
 
         <div className="relative">
-          <svg className={iconClass} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
+          <svg
+            className={iconClass}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            aria-hidden="true"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -92,7 +134,9 @@ export const LoginForm = () => {
             type="password"
             autoComplete="current-password"
             aria-invalid={!!errors.password}
-            aria-describedby={errors.password ? "password-error" : undefined}
+            aria-describedby={
+              errors.password ? "password-error" : undefined
+            }
             {...register("password")}
             className={inputClass}
             placeholder="••••••••"
@@ -106,12 +150,17 @@ export const LoginForm = () => {
         )}
       </div>
 
+      {/* Login error */}
       {loginMutation.isError && (
-        <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600">
-          Unable to login. Please check your credentials.
-        </p>
-      )}
+  <p
+    role="alert"
+    className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600"
+  >
+    {getApiErrorMessage(loginMutation.error)}
+  </p>
+)}
 
+      {/* Submit */}
       <button
         type="submit"
         disabled={loginMutation.isPending}

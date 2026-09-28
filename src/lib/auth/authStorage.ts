@@ -1,4 +1,5 @@
 import type { AuthUser } from "../../features/auth/types/auth.types";
+
 const USER_KEY = "supreme_admin_user";
 
 export const authStorage = {
