@@ -25,8 +25,7 @@ const navigationIcons = {
 
 export const Sidebar = ({ onLogout }: SidebarProps) => {
   return (
-    <aside className="hidden h-screen w-64 shrink-0 flex-col border-r border-gray-100 bg-white lg:flex">
-      {/* Logo */}
+    <aside className="hidden h-screen min-h-screen w-64 shrink-0 flex-col border-r border-gray-100 bg-white lg:flex">      {/* Logo */}
       <div className="flex h-16 items-center border-b border-gray-100 px-5">
         <div className="flex items-center gap-3">
           <img
@@ -76,7 +75,7 @@ export const Sidebar = ({ onLogout }: SidebarProps) => {
       </nav>
 
       {/* Logout */}
-      <div className="border-t border-gray-100 p-3">
+      <div className="mt-auto border-t border-gray-100 p-3">
         <button
           type="button"
           onClick={onLogout}
