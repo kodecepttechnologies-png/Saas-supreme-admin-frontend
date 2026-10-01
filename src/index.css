@@ -1,1 +1,76 @@
 @import "tailwindcss";
+
+:root {
+  --color-primary: #6366f1;
+  --color-primary-dark: #4338ca;
+  --color-background: #f5f6fa;
+  --color-surface: #ffffff;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-border: #e5e7eb;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --shadow-soft: 0 10px 30px rgba(99, 102, 241, 0.08);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+/* ─────────────────────────────────────────────────────────
+   DARK MODE
+   Tailwind v4 utilities reference CSS variables (e.g.,
+   bg-white → background-color: var(--color-white)).
+   Overriding the variables here makes every utility class
+   automatically adopt the dark palette — no component
+   changes required.
+───────────────────────────────────────────────────────── */
+
+html.dark {
+  color-scheme: dark;
+
+  /* ── Surface backgrounds ── */
+  --color-white:    #1e2132;   /* bg-white  → sidebar, header, cards     */
+  --color-gray-50:  #252840;   /* bg-gray-50 → hover states              */
+  --color-gray-100: #2d3148;   /* bg-gray-100 / border-gray-100          */
+  --color-gray-200: #363a55;   /* border-gray-200                        */
+  --color-gray-300: #484d6a;
+
+  /* ── Text ── */
+  --color-gray-400: #8890a8;   /* muted text, icons                      */
+  --color-gray-500: #9ba3ba;   /* secondary text                         */
+  --color-gray-600: #c5cad8;   /* body / nav text                        */
+  --color-gray-700: #d5dae8;
+  --color-gray-800: #e5eaf5;
+  --color-gray-900: #eef1fa;   /* headings / primary text                */
+
+  /* ── Slate (used in NotificationsPage) ── */
+  --color-slate-200: #2d3148;
+  --color-slate-300: #363a55;
+  --color-slate-400: #8890a8;
+  --color-slate-500: #9ba3ba;
+  --color-slate-900: #eef1fa;
+
+  /* ── Accent adjustments ── */
+  --color-indigo-50: rgba(99, 102, 241, 0.13);   /* active nav bg        */
+  --color-red-50:    rgba(220, 38, 38, 0.10);    /* logout hover         */
+}
+
+/* Handle the hardcoded bg-[#F5F6FA] layout background */
+html.dark [class*="F5F6FA"] {
+  background-color: #12141e !important;
+}
+
+/* Slightly soften shadows in dark mode */
+html.dark .shadow-sm {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45) !important;
+}
+html.dark .shadow-lg,
+html.dark .shadow-xl {
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+}

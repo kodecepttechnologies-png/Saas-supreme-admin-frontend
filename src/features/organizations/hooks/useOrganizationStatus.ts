@@ -5,13 +5,16 @@ import {
   unblockOrganization,
 } from "../api/organizations.api";
 
-type OrganizationStatusAction = "block" | "unblock";
+type OrganizationStatusAction =
+  | "block"
+  | "unblock";
 
 interface UseOrganizationStatusReturn {
   changeStatus: (
     organizationId: string,
     action: OrganizationStatusAction,
   ) => Promise<boolean>;
+
   isLoading: boolean;
   error: string | null;
   success: boolean;
@@ -56,7 +59,7 @@ export const useOrganizationStatus =
       }
     };
 
-    const reset = (): void => {
+    const reset = () => {
       setError(null);
       setSuccess(false);
     };

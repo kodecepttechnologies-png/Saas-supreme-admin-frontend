@@ -26,8 +26,8 @@ export const CreateOrganizationForm = ({
 
   return (
     <div className="space-y-4">
-      <div className="rounded-lg border border-blue-100 bg-blue-50 px-4 py-3">
-        <p className="text-sm text-blue-700">
+      <div className="rounded-xl border border-indigo-100 bg-indigo-50/60 px-4 py-3">
+        <p className="text-sm text-indigo-700">
           Enter the organization information below.
         </p>
       </div>
@@ -39,4 +39,4 @@ export const CreateOrganizationForm = ({
       />
     </div>
   );
-};
+};

@@ -1,13 +1,12 @@
 import {
   createContext,
   useContext,
-  useEffect,
   useState,
   type ReactNode,
 } from "react";
 
-import { authApi } from "../api/auth.api";
 import { authStorage } from "../../../lib/auth/authStorage";
+import { tokenStorage } from "../../../lib/auth/tokenStorage";
 
 import type {
   AuthState,
@@ -27,28 +26,10 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-export const AuthProvider = ({
-  children,
-}: AuthProviderProps) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUserState] = useState<AuthUser | null>(
     authStorage.getUser(),
   );
-
-  useEffect(() => {
-    const restoreSession = async () => {
-      try {
-        const response = await authApi.getCurrentUser();
-
-        setUserState(response.user);
-        authStorage.setUser(response.user);
-      } catch {
-        authStorage.clear();
-        setUserState(null);
-      }
-    };
-
-    restoreSession();
-  }, []);
 
   const setUser = (newUser: AuthUser) => {
     setUserState(newUser);
@@ -58,6 +39,7 @@ export const AuthProvider = ({
   const clearAuth = () => {
     setUserState(null);
     authStorage.clear();
+    tokenStorage.clear();
   };
 
   return (
@@ -78,9 +60,7 @@ export const useAuth = (): AuthContextValue => {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error(
-      "useAuth must be used inside AuthProvider",
-    );
+    throw new Error("useAuth must be used inside AuthProvider");
   }
 
   return context;

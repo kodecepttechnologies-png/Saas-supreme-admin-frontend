@@ -132,15 +132,15 @@ export const OrganizationForm = ({
             }
             disabled={isSubmitting}
             placeholder="Enter organization name"
-            className={`w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition focus:ring-2 ${
+            className={`w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none transition-all duration-150 focus:ring-2 disabled:cursor-not-allowed disabled:bg-gray-50 ${
               errors.name
-                ? "border-red-500 focus:ring-red-200"
-                : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"
+                ? "border-red-400 focus:border-red-500 focus:ring-red-500/20"
+                : "border-gray-200 focus:border-indigo-500 focus:ring-indigo-500/20"
             }`}
           />
 
           {errors.name && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-xs text-red-600">
               {errors.name}
             </p>
           )}
@@ -164,15 +164,15 @@ export const OrganizationForm = ({
             }
             disabled={isSubmitting}
             placeholder="contact@example.com"
-            className={`w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition focus:ring-2 ${
+            className={`w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none transition-all duration-150 focus:ring-2 disabled:cursor-not-allowed disabled:bg-gray-50 ${
               errors.email
-                ? "border-red-500 focus:ring-red-200"
-                : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"
+                ? "border-red-400 focus:border-red-500 focus:ring-red-500/20"
+                : "border-gray-200 focus:border-indigo-500 focus:ring-indigo-500/20"
             }`}
           />
 
           {errors.email && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-xs text-red-600">
               {errors.email}
             </p>
           )}
@@ -196,11 +196,11 @@ export const OrganizationForm = ({
             }
             disabled={isSubmitting}
             placeholder="+91 9876543210"
-            className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none transition-all duration-150 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 disabled:cursor-not-allowed disabled:bg-gray-50"
           />
 
           {errors.phone && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-xs text-red-600">
               {errors.phone}
             </p>
           )}
@@ -224,11 +224,11 @@ export const OrganizationForm = ({
             disabled={isSubmitting}
             placeholder="Enter organization address"
             rows={3}
-            className="w-full resize-none rounded-lg border border-gray-300 px-4 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            className="w-full resize-none rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none transition-all duration-150 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 disabled:cursor-not-allowed disabled:bg-gray-50"
           />
 
           {errors.address && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-xs text-red-600">
               {errors.address}
             </p>
           )}
@@ -252,15 +252,15 @@ export const OrganizationForm = ({
             }
             disabled={isSubmitting}
             placeholder="https://example.com/logo.png"
-            className={`w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition focus:ring-2 ${
+            className={`w-full rounded-xl border bg-white px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none transition-all duration-150 focus:ring-2 disabled:cursor-not-allowed disabled:bg-gray-50 ${
               errors.logoUrl
-                ? "border-red-500 focus:ring-red-200"
-                : "border-gray-300 focus:border-blue-500 focus:ring-blue-100"
+                ? "border-red-400 focus:border-red-500 focus:ring-red-500/20"
+                : "border-gray-200 focus:border-indigo-500 focus:ring-indigo-500/20"
             }`}
           />
 
           {errors.logoUrl && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-xs text-red-600">
               {errors.logoUrl}
             </p>
           )}
@@ -285,7 +285,7 @@ export const OrganizationForm = ({
               )
             }
             disabled={isSubmitting}
-            className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            className="w-full appearance-none rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-900 outline-none transition-all duration-150 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 disabled:cursor-not-allowed disabled:bg-gray-50"
           >
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
@@ -294,7 +294,7 @@ export const OrganizationForm = ({
           </select>
 
           {errors.status && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="mt-1 text-xs text-red-600">
               {errors.status}
             </p>
           )}
@@ -302,13 +302,13 @@ export const OrganizationForm = ({
       </div>
 
       {/* Actions */}
-      <div className="flex flex-col-reverse gap-3 border-t border-gray-200 pt-5 sm:flex-row sm:justify-end">
+      <div className="flex flex-col-reverse gap-3 border-t border-gray-100 pt-5 sm:flex-row sm:justify-end">
         {onCancel && (
           <button
             type="button"
             onClick={onCancel}
             disabled={isSubmitting}
-            className="rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+            className="rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-700 transition-colors duration-150 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Cancel
           </button>
@@ -317,7 +317,11 @@ export const OrganizationForm = ({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded-lg bg-[#5e94db] px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          style={{
+            background: "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
+            boxShadow: "0 4px 24px rgba(99,102,241,0.35)",
+          }}
         >
           {isSubmitting ? "Saving..." : "Save Changes"}
         </button>

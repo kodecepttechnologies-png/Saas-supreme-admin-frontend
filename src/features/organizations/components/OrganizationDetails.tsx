@@ -16,11 +16,11 @@ const DetailItem = ({
 }: DetailItemProps) => {
   return (
     <div>
-      <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+      <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
         {label}
       </p>
 
-      <p className="mt-1 wrap-break-word text-sm text-slate-700">
+      <p className="mt-1 wrap-break-word text-sm text-gray-700">
         {value}
       </p>
     </div>
@@ -31,13 +31,13 @@ export const OrganizationDetails = ({
   organization,
 }: OrganizationDetailsProps) => {
   return (
-    <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
-      <div className="border-b border-slate-200 px-5 py-4 sm:px-6">
-        <h2 className="text-lg font-semibold text-slate-900">
+    <section className="rounded-2xl border border-gray-100 bg-white shadow-[0_10px_30px_rgba(99,102,241,0.08)]">
+      <div className="border-b border-gray-100 px-5 py-4 sm:px-6">
+        <h2 className="text-lg font-semibold text-gray-900">
           Basic Information
         </h2>
 
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-gray-500">
           Organization contact and account information.
         </p>
       </div>
@@ -71,7 +71,7 @@ export const OrganizationDetails = ({
         </div>
 
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+          <p className="text-xs font-medium uppercase tracking-wide text-gray-500">
             Status
           </p>
 
@@ -119,7 +119,7 @@ export const OrganizationDetails = ({
               <img
                 src={organization.logoUrl}
                 alt={`${organization.name} logo`}
-                className="h-20 w-20 rounded-lg border border-slate-200 object-contain"
+                className="h-20 w-20 rounded-xl border border-gray-100 object-contain"
               />
             </div>
           </div>

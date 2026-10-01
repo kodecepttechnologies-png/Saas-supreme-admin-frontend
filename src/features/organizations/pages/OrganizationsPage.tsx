@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import type { Organization } from "../types/organization.types";
 
-import { mockOrganizations } from "../data/organizations.mock";
-
 import { useOrganizationStatus } from "../hooks/useOrganizationStatus";
 
 import { OrganizationSearch } from "../components/OrganizationSearch";
@@ -16,8 +14,10 @@ import { OrganizationStatusDialog } from "../components/OrganizationStatusDialog
 export const OrganizationsPage = () => {
   const navigate = useNavigate();
 
+  // Temporary empty state until backend GET organizations
+  // endpoint is provided.
   const [organizations, setOrganizations] =
-    useState<Organization[]>(mockOrganizations);
+    useState<Organization[]>([]);
 
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] =
@@ -169,11 +169,11 @@ export const OrganizationsPage = () => {
         {filteredOrganizations.length === 0 ? (
           <div className="rounded-xl border border-slate-200 bg-white p-10 text-center shadow-sm">
             <h2 className="text-lg font-semibold text-slate-900">
-              No organizations found
+              No organizations available
             </h2>
 
             <p className="mt-2 text-sm text-slate-500">
-              Try changing your search or filter.
+              Organization list API is not connected yet.
             </p>
           </div>
         ) : (

@@ -2,6 +2,9 @@ import type { ReactNode } from "react";
 
 import { QueryProvider } from "./QueryProvider";
 import { AuthProvider } from "../../features/auth";
+import { ToastProvider } from "../../components/ui/Toast";
+import { ThemeProvider } from "../../lib/theme/ThemeContext";
+
 
 interface AppProvidersProps {
   children: ReactNode;
@@ -11,10 +14,14 @@ export const AppProviders = ({
   children,
 }: AppProvidersProps) => {
   return (
-    <QueryProvider>
-      <AuthProvider>
-        {children}
-      </AuthProvider>
-    </QueryProvider>
+    <ThemeProvider>
+      <QueryProvider>
+        <AuthProvider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </AuthProvider>
+      </QueryProvider>
+    </ThemeProvider>
   );
 };

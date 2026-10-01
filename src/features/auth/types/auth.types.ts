@@ -3,26 +3,26 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface RegisterRequest {
+export interface AuthUser {
+  customId: string;
+  name: string;
   email: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName?: string;
-  phone?: string;
+  isActive: boolean;
+  lastLoginAt: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
-export interface AuthUser {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName?: string;
-  phone?: string;
+export interface LoginResponseData {
+  supremeAdmin: AuthUser;
+  token: string;
+  refreshToken: string;
 }
 
 export interface AuthResponse {
-  user: AuthUser;
-  accessToken: string;
+  success: boolean;
+  message: string;
+  data: LoginResponseData;
 }
 
 export interface AuthState {

@@ -1,19 +1,12 @@
-// import { Navigate, Outlet } from "react-router-dom";
-
-// import { useAuth } from "../../features/auth/hooks/AuthContext";
-
-// export const ProtectedRoute = () => {
-//   const { isAuthenticated } = useAuth();
-
-//   if (!isAuthenticated) {
-//     return <Navigate to="/login" replace />;
-//   }
-
-//   return <Outlet />;
-// };
-
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../../features/auth/hooks/AuthContext";
 
 export const ProtectedRoute = () => {
+  const { isAuthenticated } = useAuth();
+
+  if (!isAuthenticated) {
+    return <Navigate to="/supreme-admin/login" replace />;
+  }
+
   return <Outlet />;
 };
