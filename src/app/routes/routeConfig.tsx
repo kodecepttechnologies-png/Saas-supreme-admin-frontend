@@ -1,9 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 
-import {
-  LoginPage,
-} from "../../features/auth";
-
+import { LoginPage } from "../../features/auth";
 import { DashboardPage } from "../../features/dashboard";
 
 import {
@@ -13,6 +10,9 @@ import {
   OrganizationsPage,
 } from "../../features/organizations";
 
+import { NotificationsPage } from "../../features/notifications/pages/NotificationsPage";
+import { PersonalSettingsPage } from "../../features/profile/pages/PersonalSettingsPage";
+
 import { SupremeAdminLayout } from "../layouts/SupremeAdminLayout";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { PublicRoute } from "./PublicRoute";
@@ -20,15 +20,24 @@ import { PublicRoute } from "./PublicRoute";
 export const AppRoutes = () => {
   return (
     <Routes>
-      {/* Public Routes */}
+      {/* ================================
+          SUPREME ADMIN LOGIN
+      ================================= */}
+
       <Route element={<PublicRoute />}>
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/supreme-admin/login"
+          element={<LoginPage />}
+        />
       </Route>
 
+      {/* ================================
+          PROTECTED SUPREME ADMIN ROUTES
+      ================================= */}
 
-      {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
         <Route element={<SupremeAdminLayout />}>
+
           {/* Dashboard */}
           <Route
             path="/dashboard"
@@ -55,13 +64,34 @@ export const AppRoutes = () => {
             path="/organizations/:organizationId/edit"
             element={<EditOrganizationPage />}
           />
+
+          {/* Notifications */}
+          <Route
+            path="/notifications"
+            element={<NotificationsPage />}
+          />
+
+          {/* Personal Settings / Profile */}
+          <Route
+            path="/profile"
+            element={<PersonalSettingsPage />}
+          />
+
         </Route>
       </Route>
 
-      {/* Fallback */}
+      {/* ================================
+          UNKNOWN URL
+      ================================= */}
+
       <Route
         path="*"
-        element={<Navigate to="/dashboard" replace />}
+        element={
+          <Navigate
+            to="/supreme-admin/login"
+            replace
+          />
+        }
       />
     </Routes>
   );
