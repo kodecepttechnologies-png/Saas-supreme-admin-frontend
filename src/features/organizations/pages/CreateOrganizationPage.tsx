@@ -28,7 +28,7 @@ export const CreateOrganizationPage = () => {
   };
 
   return (
-    <main className="p-5 sm:p-8">
+    <main className="p-4 sm:p-6 lg:p-8">
       <div className="mx-auto max-w-3xl">
         <div className="mb-6">
           <button
@@ -36,16 +36,16 @@ export const CreateOrganizationPage = () => {
             onClick={() =>
               navigate("/organizations")
             }
-            className="mb-4 text-sm font-medium text-[#5e94db] hover:underline"
+            className="mb-4 text-sm font-medium text-indigo-600 transition-colors duration-150 hover:text-indigo-700 hover:underline"
           >
             ← Back to Organizations
           </button>
 
-          <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-gray-900">
             Create Organization
           </h1>
 
-          <p className="mt-2 text-sm text-slate-500">
+          <p className="mt-1 text-sm text-gray-500">
             Add a new organization to the platform.
           </p>
         </div>
@@ -59,7 +59,7 @@ export const CreateOrganizationPage = () => {
           </div>
         )}
 
-        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+        <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-[0_10px_30px_rgba(99,102,241,0.08)] sm:p-6">
           <CreateOrganizationForm
             onSubmit={handleSubmit}
             onCancel={() =>
