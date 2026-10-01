@@ -15,3 +15,6 @@ export type { BadgeVariant } from "./Badge";
 export { Modal } from "./Modal";
 
 export { PageHeader } from "./PageHeader";
+
+export { ToastProvider, useToast } from "./Toast";
+export type { ToastVariant, ToastItem } from "./Toast";
