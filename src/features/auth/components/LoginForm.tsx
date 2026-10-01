@@ -1,32 +1,54 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { tokenStorage } from "../../../lib/auth/tokenStorage";
+import { getApiErrorMessage } from "../../../lib/api/apiError";
 import { loginSchema, type LoginFormData } from "../schemas/login.schema";
 import { useLogin } from "../hooks/useLogin";
 import { useAuth } from "../hooks/AuthContext";
 
-import { tokenStorage } from "../../../lib/auth/tokenStorage";
-import { getApiErrorMessage } from "../../../lib/api/apiError";
+/* ── Inline SVG icons ── */
+const EmailIcon = () => (
+  <svg className="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="m2 7 10 7 10-7" />
+  </svg>
+);
 
-const inputClass =
-  "w-full rounded-lg border border-slate-200 bg-white py-2.5 pl-11 pr-4 text-[15px] text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-[#5e94db] focus:ring-4 focus:ring-[#5e94db]/15";
+const LockIcon = () => (
+  <svg className="h-4 w-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="3" y="11" width="18" height="11" rx="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
 
-const labelClass =
-  "mb-1.5 block text-sm font-medium text-slate-700";
+const EyeIcon = () => (
+  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
 
-const errorClass =
-  "mt-1.5 text-sm text-red-600";
+const EyeOffIcon = () => (
+  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+    <line x1="1" y1="1" x2="23" y2="23" />
+  </svg>
+);
 
-const iconClass =
-  "pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400";
+const inputBase =
+  "w-full rounded-xl border bg-white py-3 pl-10 pr-4 text-sm text-gray-900 placeholder-slate-400 outline-none transition focus:ring-2";
+
+const inputNormal = `${inputBase} border-gray-200 focus:border-indigo-500 focus:ring-indigo-500/20`;
+const inputError = `${inputBase} border-red-400 focus:border-red-500 focus:ring-red-500/20`;
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-
   const { setUser } = useAuth();
-
   const loginMutation = useLogin();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -36,137 +58,117 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
- const onSubmit = async (data: LoginFormData) => {
-  try {
-    const response = await loginMutation.mutateAsync(data);
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      const response = await loginMutation.mutateAsync(data);
 
-    console.log("LOGIN SUCCESS:", response);
+      tokenStorage.setToken(response.data.token);
+      setUser(response.data.supremeAdmin);
 
-    // Save access token
-    tokenStorage.setToken(response.data.token);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("LOGIN FAILED:", error);
+      console.error("LOGIN ERROR MESSAGE:", getApiErrorMessage(error));
+    }
+  };
 
-    // Save logged-in Supreme Admin
-    setUser(response.data.supremeAdmin);
-
-    // Go to dashboard
-    navigate("/dashboard");
-  } catch (error) {
-    console.error("LOGIN FAILED:", error);
-
-    const message = getApiErrorMessage(error);
-
-    console.error("LOGIN ERROR MESSAGE:", message);
-  }
-};
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-5"
-      noValidate
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       {/* Email */}
       <div>
-        <label htmlFor="email" className={labelClass}>
+        <label htmlFor="login-email" className="mb-1.5 block text-sm font-medium text-gray-700">
           Email
         </label>
-
         <div className="relative">
-          <svg
-            className={iconClass}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 7.5 12 13l9-5.5M4.5 5.5h15A1.5 1.5 0 0 1 21 7v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17V7a1.5 1.5 0 0 1 1.5-1.5Z"
-            />
-          </svg>
-
+          <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+            <EmailIcon />
+          </span>
           <input
-            id="email"
+            id="login-email"
             type="email"
             autoComplete="email"
-            aria-invalid={!!errors.email}
-            aria-describedby={
-              errors.email ? "email-error" : undefined
-            }
             {...register("email")}
-            className={inputClass}
-            placeholder="admin@example.com"
+            className={errors.email ? inputError : inputNormal}
+            placeholder="you@example.com"
           />
         </div>
-
         {errors.email && (
-          <p id="email-error" className={errorClass}>
-            {errors.email.message}
-          </p>
+          <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
         )}
       </div>
 
       {/* Password */}
       <div>
-        <label htmlFor="password" className={labelClass}>
+        <label htmlFor="login-password" className="mb-1.5 block text-sm font-medium text-gray-700">
           Password
         </label>
-
         <div className="relative">
-          <svg
-            className={iconClass}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M7.5 10.5V8a4.5 4.5 0 1 1 9 0v2.5M6 10.5h12a1.5 1.5 0 0 1 1.5 1.5v7a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 19v-7A1.5 1.5 0 0 1 6 10.5Z"
-            />
-          </svg>
-
+          <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+            <LockIcon />
+          </span>
           <input
-            id="password"
-            type="password"
+            id="login-password"
+            type={showPassword ? "text" : "password"}
             autoComplete="current-password"
-            aria-invalid={!!errors.password}
-            aria-describedby={
-              errors.password ? "password-error" : undefined
-            }
             {...register("password")}
-            className={inputClass}
+            className={`${errors.password ? inputError : inputNormal} pr-10`}
             placeholder="••••••••"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            className="absolute inset-y-0 right-3 flex items-center text-slate-400 hover:text-slate-600 transition"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+          </button>
         </div>
-
         {errors.password && (
-          <p id="password-error" className={errorClass}>
-            {errors.password.message}
-          </p>
+          <p className="mt-1 text-xs text-red-500">{errors.password.message}</p>
         )}
       </div>
 
-      {/* Login error */}
+      {/* Remember me + Forgot password */}
+      <div className="flex items-center justify-between">
+        <label className="flex cursor-pointer items-center gap-2 text-sm text-gray-600 select-none">
+          <input
+            type="checkbox"
+            id="remember-me"
+            className="h-4 w-4 rounded border-gray-300 bg-white accent-indigo-600"
+          />
+          Remember me
+        </label>
+        <a href="#" className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 hover:underline transition">
+          Forgot password?
+        </a>
+      </div>
+
+      {/* API error */}
       {loginMutation.isError && (
-  <p
-    role="alert"
-    className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600"
-  >
-    {getApiErrorMessage(loginMutation.error)}
-  </p>
-)}
+        <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-600 border border-red-200">
+          Unable to login. Please check your credentials.
+        </p>
+      )}
 
       {/* Submit */}
       <button
+        id="login-submit"
         type="submit"
         disabled={loginMutation.isPending}
-        className="w-full rounded-lg bg-[#5e94db] px-4 py-3 font-semibold text-white shadow-sm shadow-[#5e94db]/30 transition hover:bg-[#4d83ca] focus:outline-none focus:ring-4 focus:ring-[#5e94db]/25 disabled:cursor-not-allowed disabled:opacity-60"
+        className="group relative w-full overflow-hidden rounded-xl px-4 py-3.5 font-semibold text-white transition disabled:cursor-not-allowed disabled:opacity-60"
+        style={{
+          background: "linear-gradient(135deg, #6366F1 0%, #4338CA 100%)",
+          boxShadow: "0 4px 24px rgba(99,102,241,0.35)",
+        }}
       >
-        {loginMutation.isPending ? "Signing in..." : "Sign in"}
+        <span className="relative flex items-center justify-center gap-2">
+          {loginMutation.isPending ? "Signing in…" : "Sign In"}
+          {!loginMutation.isPending && (
+            <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          )}
+        </span>
       </button>
     </form>
   );

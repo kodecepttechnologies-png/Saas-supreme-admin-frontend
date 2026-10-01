@@ -13,31 +13,31 @@ export const OrganizationTable = ({
   onStatusAction,
 }: OrganizationTableProps) => {
   return (
-    <div className="hidden overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm lg:block">
+    <div className="hidden overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-[0_10px_30px_rgba(99,102,241,0.08)] lg:block">
       <table className="w-full">
-        <thead className="border-b border-slate-200 bg-slate-50">
+        <thead className="border-b border-gray-100 bg-gray-50/70">
           <tr>
-            <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+            <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
               Name
             </th>
 
-            <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+            <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
               Status
             </th>
 
-            <th className="px-6 py-4 text-right text-sm font-semibold text-slate-700">
+            <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wide text-gray-500">
               Actions
             </th>
           </tr>
         </thead>
 
-        <tbody className="divide-y divide-slate-100">
+        <tbody className="divide-y divide-gray-100">
           {organizations.map((organization) => (
             <tr
               key={organization.customId}
-              className="transition hover:bg-slate-50"
+              className="transition-colors duration-100 hover:bg-indigo-50/30"
             >
-              <td className="px-6 py-4 text-sm font-medium text-slate-900">
+              <td className="px-6 py-4 text-sm font-medium text-gray-900">
                 {organization.name}
               </td>
 
@@ -52,7 +52,7 @@ export const OrganizationTable = ({
                   <button
                     type="button"
                     onClick={() => onView?.(organization)}
-                    className="text-sm font-medium text-[#5e94db] hover:underline"
+                    className="text-sm font-medium text-indigo-600 transition-colors duration-150 hover:text-indigo-700 hover:underline"
                   >
                     View
                   </button>
@@ -62,7 +62,7 @@ export const OrganizationTable = ({
                     onClick={() =>
                       onStatusAction?.(organization)
                     }
-                    className="text-sm font-medium text-slate-600 hover:underline"
+                    className="text-sm font-medium text-gray-600 transition-colors duration-150 hover:text-gray-900 hover:underline"
                   >
                     {organization.status === "blocked"
                       ? "Unblock"
@@ -76,4 +76,4 @@ export const OrganizationTable = ({
       </table>
     </div>
   );
-};
+};

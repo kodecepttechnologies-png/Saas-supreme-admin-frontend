@@ -17,18 +17,18 @@ export const EmployeeReadOnlyList = ({
 }: EmployeeReadOnlyListProps) => {
   if (isLoading) {
     return (
-      <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-200 px-5 py-4 sm:px-6">
-          <h2 className="text-lg font-semibold text-slate-900">
+      <section className="rounded-2xl border border-gray-100 bg-white shadow-[0_10px_30px_rgba(99,102,241,0.08)]">
+        <div className="border-b border-gray-100 px-5 py-4 sm:px-6">
+          <h2 className="text-lg font-semibold text-gray-900">
             Employees
           </h2>
         </div>
 
         <div className="p-6">
           <div className="animate-pulse space-y-4">
-            <div className="h-12 rounded-lg bg-slate-100" />
-            <div className="h-12 rounded-lg bg-slate-100" />
-            <div className="h-12 rounded-lg bg-slate-100" />
+            <div className="h-12 rounded-xl bg-gray-100" />
+            <div className="h-12 rounded-xl bg-gray-100" />
+            <div className="h-12 rounded-xl bg-gray-100" />
           </div>
         </div>
       </section>
@@ -36,30 +36,30 @@ export const EmployeeReadOnlyList = ({
   }
 
   return (
-    <section className="rounded-xl border border-slate-200 bg-white shadow-sm">
-      <div className="border-b border-slate-200 px-5 py-4 sm:px-6">
-        <h2 className="text-lg font-semibold text-slate-900">
+    <section className="rounded-2xl border border-gray-100 bg-white shadow-[0_10px_30px_rgba(99,102,241,0.08)]">
+      <div className="border-b border-gray-100 px-5 py-4 sm:px-6">
+        <h2 className="text-lg font-semibold text-gray-900">
           Employees
         </h2>
 
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-gray-500">
           Read-only employee information for this organization.
         </p>
       </div>
 
       {employees.length === 0 ? (
         <div className="p-8 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100">
-            <span className="text-lg text-slate-400">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
+            <span className="text-lg text-gray-400">
               👥
             </span>
           </div>
 
-          <h3 className="mt-4 text-sm font-semibold text-slate-900">
+          <h3 className="mt-4 text-sm font-semibold text-gray-900">
             No employee information
           </h3>
 
-          <p className="mx-auto mt-1 max-w-md text-sm text-slate-500">
+          <p className="mx-auto mt-1 max-w-md text-sm text-gray-500">
             Employee information is not currently available for
             this organization.
           </p>
@@ -69,42 +69,42 @@ export const EmployeeReadOnlyList = ({
           {/* Desktop */}
           <div className="hidden overflow-x-auto md:block">
             <table className="w-full">
-              <thead className="border-b border-slate-200 bg-slate-50">
+              <thead className="border-b border-gray-100 bg-gray-50/70">
                 <tr>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                     Name
                   </th>
 
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                     Email
                   </th>
 
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                     Role
                   </th>
 
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-slate-700">
+                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                     Status
                   </th>
                 </tr>
               </thead>
 
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-gray-100">
                 {employees.map((employee) => (
-                  <tr key={employee.id}>
-                    <td className="px-6 py-4 text-sm font-medium text-slate-900">
+                  <tr key={employee.id} className="transition-colors duration-100 hover:bg-indigo-50/20">
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
                       {employee.name}
                     </td>
 
-                    <td className="px-6 py-4 text-sm text-slate-600">
+                    <td className="px-6 py-4 text-sm text-gray-600">
                       {employee.email}
                     </td>
 
-                    <td className="px-6 py-4 text-sm text-slate-600">
+                    <td className="px-6 py-4 text-sm text-gray-600">
                       {employee.role}
                     </td>
 
-                    <td className="px-6 py-4 text-sm text-slate-600">
+                    <td className="px-6 py-4 text-sm text-gray-600">
                       {employee.status}
                     </td>
                   </tr>
@@ -118,22 +118,22 @@ export const EmployeeReadOnlyList = ({
             {employees.map((employee) => (
               <article
                 key={employee.id}
-                className="rounded-lg border border-slate-200 p-4"
+                className="rounded-xl border border-gray-100 p-4"
               >
-                <p className="font-medium text-slate-900">
+                <p className="font-medium text-gray-900">
                   {employee.name}
                 </p>
 
-                <p className="mt-1 break-all text-sm text-slate-500">
+                <p className="mt-1 break-all text-sm text-gray-500">
                   {employee.email}
                 </p>
 
                 <div className="mt-3 flex items-center justify-between">
-                  <span className="text-sm text-slate-600">
+                  <span className="text-sm text-gray-600">
                     {employee.role}
                   </span>
 
-                  <span className="text-xs font-medium capitalize text-slate-500">
+                  <span className="text-xs font-medium capitalize text-gray-500">
                     {employee.status}
                   </span>
                 </div>

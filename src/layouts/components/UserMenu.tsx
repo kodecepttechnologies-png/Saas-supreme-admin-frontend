@@ -4,26 +4,26 @@ export const UserMenu = () => {
   return (
     <button
       type="button"
-      className="flex items-center gap-2 rounded-xl px-2 py-1.5 hover:bg-slate-100"
+      className="flex items-center gap-2 rounded-xl px-2 py-1.5 transition-colors duration-150 hover:bg-gray-50"
     >
-      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#5e94db]/10 text-[#5e94db]">
+      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50 text-indigo-600">
         <User size={18} />
       </div>
 
       <div className="hidden text-left md:block">
-        <p className="text-sm font-medium text-slate-900">
+        <p className="text-sm font-medium text-gray-900">
           Supreme Admin
         </p>
 
-        <p className="text-xs text-slate-500">
+        <p className="text-xs text-gray-500">
           Administrator
         </p>
       </div>
 
       <ChevronDown
         size={16}
-        className="hidden text-slate-400 md:block"
+        className="hidden text-gray-400 md:block"
       />
     </button>
   );
-};
+};

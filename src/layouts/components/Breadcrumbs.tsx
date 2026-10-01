@@ -23,11 +23,11 @@ export const Breadcrumbs = () => {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="flex items-center gap-2 text-sm"
+      className="flex items-center gap-1.5 text-sm"
     >
       <Link
         to="/dashboard"
-        className="text-slate-500 hover:text-[#5e94db]"
+        className="text-gray-500 transition-colors duration-150 hover:text-indigo-600"
       >
         Home
       </Link>
@@ -38,18 +38,18 @@ export const Breadcrumbs = () => {
         return (
           <div
             key={`${segment}-${index}`}
-            className="flex items-center gap-2"
+            className="flex items-center gap-1.5"
           >
             <ChevronRight
-              size={15}
-              className="text-slate-400"
+              size={14}
+              className="shrink-0 text-gray-300"
             />
 
             <span
               className={
                 isLast
-                  ? "font-medium text-slate-900"
-                  : "text-slate-500"
+                  ? "font-medium text-gray-900"
+                  : "text-gray-500"
               }
             >
               {routeLabels[segment] ?? segment}
@@ -59,4 +59,4 @@ export const Breadcrumbs = () => {
       })}
     </nav>
   );
-};
+};
