@@ -68,7 +68,7 @@ const DashboardMockup = () => (
 
 export const LoginPage = () => {
   return (
-    <div className="min-h-screen bg-[#F5F6FA] flex flex-col" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="login-light-theme min-h-screen bg-[#F5F6FA] flex flex-col" style={{ fontFamily: "'Inter', sans-serif" }}>
       {/* Decorative blobs */}
       <div className="pointer-events-none fixed top-0 right-0 w-72 h-72 overflow-hidden z-0">
         <div className="absolute top-[-40px] right-[-40px] w-64 h-64 rounded-full opacity-30" style={{ background: "radial-gradient(circle,#6366F1 0%,#4338CA 60%,transparent 80%)" }} />

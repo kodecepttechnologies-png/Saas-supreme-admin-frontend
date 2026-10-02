@@ -73,4 +73,57 @@ html.dark .shadow-sm {
 html.dark .shadow-lg,
 html.dark .shadow-xl {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* ─────────────────────────────────────────────────────────
+   LOGIN PAGE — always light theme
+   Resets all dark-mode variable overrides so the login
+   page renders in light mode regardless of html.dark.
+───────────────────────────────────────────────────────── */
+html.dark .login-light-theme,
+html.dark .login-light-theme * {
+  color-scheme: light;
+}
+
+html.dark .login-light-theme {
+  /* ── Surface backgrounds ── */
+  --color-white:    #ffffff;
+  --color-gray-50:  #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+
+  /* ── Text ── */
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* ── Slate ── */
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-900: #0f172a;
+
+  /* ── Accent ── */
+  --color-indigo-50: #eef2ff;
+  --color-red-50:    #fef2f2;
+}
+
+/* Reset background override for the login page wrapper */
+html.dark .login-light-theme[class*="F5F6FA"],
+html.dark .login-light-theme [class*="F5F6FA"] {
+  background-color: #F5F6FA !important;
+}
+
+/* Reset shadows on login page */
+html.dark .login-light-theme .shadow-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+html.dark .login-light-theme .shadow-lg,
+html.dark .login-light-theme .shadow-xl {
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1) !important;
 }
